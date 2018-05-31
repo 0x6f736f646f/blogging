@@ -1,0 +1,66 @@
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+<main class="main pt-4" role="main">
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-4">
+
+        <article class="card mb-4">
+          <header class="card-header">
+            <div class="card-meta">
+              <a href=""><time class="timeago" datetime="2017-10-26 20:00" data-tid="1">6 months ago</time></a> in <a href="">Journey</a>
+            </div>
+            <a href="">
+              <h4 class="card-title">How can we sing about love?</h4>
+            </a>
+          </header>
+          <a href="">
+            <img class="card-img" src="{% static "/img/18.jpg" %}" alt="">
+          </a>
+          <div class="card-body">
+            <p class="card-text">Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. </p>
+          </div>
+        </article><!-- /.card -->
+      </div>
+      <div class="col-md-4">
+        {% for blog in blogs %}
+        <article class="card mb-4">
+          <header class="card-header">
+            <div class="card-meta">
+              <a href=""><time class="timeago" data-tid="4">{{ blog.publish_date }}</time></a> in <a href="">Lifestyle</a>
+            </div>
+            <a href="{% url "individual_blog" blog.id %}">
+              <h4 class="card-title">{{ blog.title }}</h4>
+            </a>
+          </header>
+          {% if blog.blog_image %}
+          <a href="{% url "individual_blog" blog.id %}">
+            <img class="card-img" src="{{ blog.blog_image.url }}" alt="">
+          </a>
+          {% endif %}
+          <div class="card-body">
+            <p class="card-text">{{ blog.blog_text|truncatewords:20 }}</p>
+            <p>{{ blog.likes }} people liked this article</p>
+          </div>
+        </article><!-- /.card -->
+        {% endfor %}
+      </div>
+      {% include "aside.html" %}
+    </div>
+  </div>
+</main>
+<div class="container">
+  {% if blogs.has_previous %}
+  <a href="?page=1">&laquo; first</a>
+  <a href="?page={{ blogs.previous_page_number }}">previous</a>
+  {% endif %}
+  Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}
+  {% if blogs.has_next %}
+    <a href="?page={{ blogs.next_page_number }}">next</a>
+    <a href="?page={{ blogs.paginator.num_pages }}">last &raquo;</a>
+  {% endif %}
+</div>
+{% endblock %}

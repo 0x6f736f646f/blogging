@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+<main class="main pt-4" role="main">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-9">
+        <article class="card mb-4">
+
+          <header class="card-header">
+            <div class="card-meta">
+              <time class="timeago">{{ blog.publish_date }}</time> in <a href="">Lifestyle</a>
+            </div>
+            <a href="">
+              <h4 class="card-title">{{ blog.title }}</h4>
+            </a>
+          </header>
+          {% if blog.blog_image %}
+          <a href="">
+            <img class="card-img" src="{{ blog.blog_image.url }}" width="426px" height="624px%">
+          </a>
+          {% endif %}
+          <div class="card-body">
+            <p class="card-text">{{ blog.blog_text }}</p>
+            <p>{{ blog.likes }} people liked this article</p>
+            <p> <a href="{% url "like_blog" blog.id %}">Like</a></p>
+          </div>
+          <h2>Comments</h2>
+          {% for c in blog.comment_set.all %}
+          <p>{{ c.name }} :</p><p>{{ c.body }}</p>
+          {% endfor %}
+          <p> <a href="{% url "add_comment" blog.id %}">Add Comment</a> </p>
+        </article>
+      </div>
+      {% include "aside.html" %}
+  </div>
+</div>
+</main>
+{% endblock %}

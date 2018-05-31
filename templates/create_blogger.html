@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% load staticfiles %}
+{% block content %}
+
+<main class="main pt-4" role="main">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-9">
+      <form class="" action="{% url "create_blogger" %}" method="post">{% csrf_token %}
+        <ul>
+			<li>
+				<label for="id_name">Name:</label>
+				<input type="text" name="name" id="id_name" maxlength="120" required />
+			</li>
+			<li>
+				<label for="id_info">Profile bio:</label>
+				<textarea name="info" rows="10" id="id_info" cols="40"></textarea>
+			</li>
+			<li>
+				<label for="id_profile_image">Profile image:</label>
+				<input type="file" name="profile_image" id="id_profile_image" />
+			</li>
+			<li>
+				<label for="id_place_from">Place from:</label>
+				<select name="place_from" id="id_place_from">
+			  		<option value="" selected>---------</option>
+			 		<option value="Juja">Juja</option>
+					  <option value="Nairobi">Nairobi</option>
+					  <option value="Kahawa">Kahawa</option>
+					  <option value="Madaraka">Madaraka</option>
+					  <option value="Athi-River">Athi-River</option>
+					  <option value="Karen">Karen</option>
+				</select>
+			</li>
+			<li>
+				<label for="id_university_name">University from:</label>
+				<select name="university_name" id="id_university_name">
+			  		<option value="" selected>---------</option>
+					<option value="JKUAT">Jommo Kenyatta University of Agriculture and technology</option>
+					<option value="UON">University of Nairobi</option>
+					<option value="KU">Kenyatta University</option>
+					<option value="STRATH">Strathmore</option>
+					<option value="DAYSTAR">Daystat University</option>
+					<option value="CUEA">Cooperative University of East Africa</option>
+				</select>
+			</li>
+			<li>
+				<label for="id_course_name">Course undertaking:</label>
+				<input type="text" name="course_name" id="id_course_name" maxlength="150" />
+			</li>
+        </ul>
+        <input type="submit" name="submit" value="Create Blogger">
+      </form>
+      </div>
+      {% include "aside_create.html" %}
+  </div>
+</div>
+</main>
+{% endblock %}

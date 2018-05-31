@@ -1,0 +1,20 @@
+{% extends "account/account_base.html" %}
+{% block sidebar %}
+  <ul>
+    <li><a href="">Articles</a></li>
+    <li><a href="">Create Article</a></li>
+  </ul>
+{% endblock %}
+{% block content %}
+  <h2>Hi {{ full_name }} you are now logged in!</h2>
+  <p>{{blogger.id}}</p>
+    <h1>Blog</h1>
+    {% for Blog in Blogs %}
+      <div>
+        <h2><a href="/Blog/{{ Blog.id }}/">{{ Blog.title }}</a></h2>
+        <p>{{ Blog.Blog_text|lower|truncatewords:"10" }}</p>
+        <p>{{ Blog.likes }} people liked this Blog</p>
+      </div>
+    {% endfor %}
+    <p>None to show</p>
+{% endblock %}
