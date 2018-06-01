@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from ourblog import views as ourblog_views
 from ourblog import models
+from django.contrib.auth.views import login
 
 admin.autodiscover()
 
@@ -33,6 +34,7 @@ urlpatterns = [
     url(r"add_comment/(\d+)/", ourblog_views.add_comment, name="add_comment"),
 
     #account logins
+    url(r"^login/$", login, {"template_name":"account/login.html"}),
     url(r"^account/login/$", ourblog_views.login, name="login"),
     url(r"^account/auth$", ourblog_views.auth_view, name="auth_view"),
     url(r"^account/logout/$", ourblog_views.logout, name="logout"),

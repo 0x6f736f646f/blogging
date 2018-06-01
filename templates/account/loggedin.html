@@ -6,6 +6,7 @@
   </ul>
 {% endblock %}
 {% block content %}
+<div class="container">
   <h2>Hi {{ full_name }} you are now logged in!</h2>
   <p>{{blogger.id}}</p>
     <h1>Blog</h1>
@@ -17,4 +18,5 @@
       </div>
     {% endfor %}
     <p>None to show</p>
+</div>
 {% endblock %}

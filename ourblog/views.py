@@ -42,18 +42,18 @@ def create_blogger(request):
 
 def create_blog(request):
     if request.method == "POST":
-        f = BlogForm(request.POST)
-        if f.is_valid():
-            f.save()
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            form.save()
             return HttpResponseRedirect("/")
 
     else:
         #data = {"publish_date":timezone.now()}
-        f = BlogForm()
-    args = {}
-    args.update(csrf(request))
-    args["f"] = f
-    return render_to_response("create_blog.html", args)
+        form = BlogForm()
+        args = {}
+        args.update(csrf(request))
+        args["form"] = form
+        return render_to_response("create_blog.html", args)
     #user = auth.get_user(request)
     #print(auth.get_user(request), "1")
     #if user.is_authenticated:
@@ -96,13 +96,13 @@ def add_comment(request, id):
     else:
         f = CommentForm()
 
-    args = {}
-    args.update(csrf(request))
+        args = {}
+        args.update(csrf(request))
 
-    args["blog"] = blog
-    args["form"] = f
+        args["blog"] = blog
+        args["form"] = f
 
-    return render_to_response("add_comment.html", args)
+        return render_to_response("add_comment.html", args)
 
 def login(request):
     c = {}
@@ -135,12 +135,14 @@ def register_user(request):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect("/account/register_success")
-    args = {}
-    args.update(csrf(request))
 
-    args["form"] = RegistrationForm()
-    print (args)
-    return render_to_response("account/register.html", args)
+    else:
+        form = RegistrationForm()
+        args = {}
+        args.update(csrf(request))
+
+        args["form"] = form
+        return render_to_response("account/register.html", args)
 
 def register_success(request):
     return render_to_response("account/register_success.html")

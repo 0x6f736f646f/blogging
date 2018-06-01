@@ -1,5 +1,6 @@
 {% extends "home.html" %}
 {% block content %}
+<div>
   {% if form.errors %}
     <p class="error">Sorry, that's not either a valid username or password</p>
   {% endif %}
@@ -10,4 +11,5 @@
     <input type="password" name="password" value="" id="password">
     <input type="submit" value="LOGIN">
   </form>
+</div>
 {% endblock %}
